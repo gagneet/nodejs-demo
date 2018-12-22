@@ -1,15 +1,18 @@
 // Use 'express' as the Web Server, as it can be scaled to a PROD level environment also
-var express = require ('express');
+//var express = require ('express');
+import express from 'express';
 
 // Path and Open help in determining the path on the web server
-var path = require ('path');
-var open = require ('open');
+//var path = require ('path');
+import path from 'path';
+//var open = require ('open');
+import open from 'open';
 
 // Set a custom port for the application to run on.
-var port = 5000;
+const port = 5000;
 
 // Create a new instance 'app' of the 'express' web server
-var app = express();
+const app = express();
 
 // Inform 'express' which routes it should handle
 // So any references to the '/' (root), should be handled by this function, which takes a request and a response

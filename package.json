@@ -6,7 +6,12 @@
   "name": "nodejs-demo",
   "version": "1.0.1",
   "description": "JavaScript development environment packages for use to build a Node.js project, obtained from: https://www.npmjs.com/search?q=",
-  "scripts": {},
+  "scripts": {
+    "prestart": "babel-node buildScripts/startMessage.js",
+    "start": "npm-run-all --parallel open:src localtunnel",
+    "open:src": "babel-node buildScripts/srcServer.js",
+    "localtunnel": "lt --port 5000 --subdomain node-demo"
+  },
   "author": "Gagneet Singh",
   "license": "MIT",
   "dependencies": {
@@ -17,6 +22,7 @@
     "babel-core": "^6.26.3",
     "@babel/core": "^7.2.2",
     "babel-loader": "^8.0.4",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-env": "^1.7.0",
     "babel-register": "^6.26.0",
     "chai": "^4.2.0",
