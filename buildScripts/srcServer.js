@@ -11,7 +11,7 @@ import open from 'open';
 // Add 'Webpack' packages to the Server (express)
 import webpack from 'webpack';
 // Add the Webpack config file we created to the Server (express)
-import config from '../webpack.config.dev';
+import config from '../webpack.config';
 
 // Set a custom port for the application to run on.
 const port = 5000;
