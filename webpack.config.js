@@ -2,14 +2,20 @@
 import path from 'path';
 
 // Webpack is configured by 'export'ing an object
-export default {
+module.exports = {
     // Setting the debuging to TRUE, enables debugging information as we run our build
-    debug: true,
+    // 'debug' was removed in webpack 2.0.0
+    //debug: true,
     // DEVTOOL has been set to inline-source-map, there are a couple of them to consider, and source-map ones are for higher quality
     devtool: 'inline-source-map',
+    //devtool: debug ? "inline-sourcemap" : false,
     // Setting 'noInfo' to false means that Webpack will display the list of all the files that it is bundling
     // Best to set this to TRUE during PROD, as it adds a lot of noise
-    noInfo: false,
+    //noInfo: false,
+
+    // The 'mode' option has not been set, webpack will fallback to 'production' for this value. Set 'mode' option to 'development' or 'production' to enable defaults for each environment.
+    // You can also set it to 'none' to disable any default behavior. Learn more: https://webpack.js.org/concepts/mode/
+    mode: 'development',
 
     // This is the entry point of the Webpack
     entry: [
@@ -33,8 +39,15 @@ export default {
 
     // define any plug-ins, if they are to be used - hot-reloading, linting, caching, styles, etc.
     plugins: [],
+    /*
+    plugins: debug ? [] : [
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurrenceOrderPlugin(),
+        new webpack.optimize.UglifyJsPlugin({ mangle: false, sourcemap: false }),
+    ],
+    */
 
-    // This informs Webpack about the file types that we wish to handle
+    /* This older format no longer works. Changing to the newer format.
     module: {
         // Webpack calls the file type defination as 'loaders'
         // 'loaders' informs Webpack how to handle different file types
@@ -45,4 +58,26 @@ export default {
             {test: /\.css$/, loaders: ['style','css']}
         ]
     }
+    */
+
+    // This informs Webpack about the file types that we wish to handle
+    module: {
+        // 'rules' informs Webpack how to handle different file types, it is the new 'loaders'
+        rules: [{
+            // include .js files
+            // we are asking it to handle .JS files
+            test: /\.jsx?$/,
+            // preload the jshint loader
+            enforce: "pre",
+            // exclude any and all files in the node_modules folder
+            exclude: /node_modules/,
+            // USe the babel loader. With webpack 2.0.0, the -loader suffix is not allowed to be omitted
+            loaders: ['babel-loader']
+        },
+        {
+            // also, it is handling the .CSS files for us.
+            test: /\.css$/,
+            loader: ['style','css']
+        }]
+    },
 }

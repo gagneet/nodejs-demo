@@ -29,6 +29,17 @@ app.use(require('webpack-dev-middleware')(compiler, {
     publicPath: config.output.publicPath
 }));
 
+/* Alternate code for the above
+var server = new WebpackDevServer(compiler, {
+    hot: true,
+    filename: config.output.filename,
+    publicPath: config.output.publicPath,
+    stats: {
+        colors: true
+    }
+});
+*/
+
 // Inform 'express' which routes it should handle
 // So any references to the '/' (root), should be handled by this function, which takes a request and a response
 app.get('/', function(req, res) {
