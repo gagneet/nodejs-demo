@@ -10,13 +10,16 @@
     "prestart": "babel-node buildScripts/startMessage.js",
     "start": "npm-run-all --parallel open:src localtunnel",
     "open:src": "babel-node buildScripts/srcServer.js",
-    "localtunnel": "lt --port 5000 --subdomain node-demo"
+    "localtunnel": "lt --port 5000 --subdomain node-demo",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Gagneet Singh",
   "license": "MIT",
   "dependencies": {
     "@babel/preset-env": "^7.2.3",
-    "whatwg-fetch": "^3.0.0"
+    "whatwg-fetch": "^3.0.0",
+    "snyk": "^1.316.1"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
@@ -58,5 +61,6 @@
   "comments": {
     "babel-preset-latest": "deprecated and babel-preset-env replaced",
     "nsp": "deprecated, no alternate package, nsp built-in npm@6"
-  }
+  },
+  "snyk": true
 }
